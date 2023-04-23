@@ -35,7 +35,11 @@ function GalleryItem({item}){
     const detailView = () => {
         return (
             <div style={detailStyle}>
-                <h2>{item.trackName}</h2>
+                <h2>
+                    <Link to={`/song/${item.trackId}`}>
+                    {item.trackName}
+                    </Link>
+                    </h2>
                 <h3>
                     <Link to={`/artist/${item.artistId}`}>
                         {item.artistName}
