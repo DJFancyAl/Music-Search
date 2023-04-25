@@ -1,5 +1,5 @@
 import {useState, useEffect} from 'react'
-import { useParams, useNavigate, Link } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 
 function SongView() {
     const navigate = useNavigate()
@@ -31,7 +31,7 @@ function SongView() {
             <h2>{songData.trackName}</h2>
             <h3>{songData.artistName}</h3>
             {navButtons()}
-            <img src={songData.artworkUrl100} />
+            <img src={songData.artworkUrl100} alt={songData.trackName} />
             <p>{songData.collectionName}</p>
             <p>Released: {songData.releaseDate}</p>
             </>

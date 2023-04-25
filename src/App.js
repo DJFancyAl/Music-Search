@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Gallery from './components/Gallery'
 import SearchBar from './components/SearchBar'
 import { DataContext } from './context/DataContext'
+import { SearchContext } from './context/SearchContext'
 import AlbumView from './components/AlbumView'
 import ArtistView from './components/ArtistView'
 import SongView from './components/SongView'
@@ -22,6 +23,7 @@ function App() {
 				const resData = await response.json()
 				if (resData.results.length > 0) {
 					setData(resData.results)
+					setMessage(search)
 				} else {
 					setMessage('Not Found')
 				}
@@ -37,22 +39,24 @@ function App() {
 
 	return (
 		<div>
-				<Router>
-					<Routes>
-						<Route path="/" element={
-							<Fragment>
-								{message}
-								<SearchBar handleSearch = {handleSearch}/>
-								<DataContext.Provider value={data}>
-									<Gallery />
-								</DataContext.Provider>
-							</Fragment>
-						} />
-						<Route path="/album/:id" element={<AlbumView />} />
-						<Route path="/artist/:id" element={<ArtistView />} />
-						<Route path="/song/:id" element={<SongView />} />
-					</Routes>
-				</Router>
+			<Router>
+				<Routes>
+					<Route path="/" element={
+						<Fragment>
+							{message}
+							<SearchContext.Provider value={handleSearch}>
+								<SearchBar />
+							</SearchContext.Provider>
+							<DataContext.Provider value={data}>
+								<Gallery />
+							</DataContext.Provider>
+						</Fragment>
+					} />
+					<Route path="/album/:id" element={<AlbumView />} />
+					<Route path="/artist/:id" element={<ArtistView />} />
+					<Route path="/song/:id" element={<SongView />} />
+				</Routes>
+			</Router>
 		</div>
   	);
 }
