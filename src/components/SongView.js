@@ -15,7 +15,7 @@ function SongView() {
     }
 
     useEffect(() => {
-        const API_URL = `http://localhost:4000/songs/${id}`
+        const API_URL = `http://localhost:4000/song/${id}`
         const fetchData = async () => {
             const response = await fetch(API_URL)
             const resData = await response.json()
